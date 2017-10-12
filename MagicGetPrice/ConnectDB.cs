@@ -7,7 +7,7 @@ namespace MagicGetPrice
 {
     public class ConnectDB
     {
-        private string _connectionString = @"data source=C:\Users\br_aq\source\repos\MTGOCardPrice\DBMP.db";
+        private string _connectionString = @"data source=D:\Apps\MagicGetPrice\MagicGetPrice\MTGDB.db";
         SQLiteConnection connection;
 
         public ConnectDB()

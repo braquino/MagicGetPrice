@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Windows;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -20,30 +22,33 @@ namespace MagicGetPrice
             string set = setName.Replace(' ', '+');
             // ... Target page.
             string page = $"https://www.mtggoldfish.com/price/{set}/{card}#online";
-            
-            // ... Use HttpClient.
-            using (WebClient client = new WebClient())
-            {
-                // ... Read the string.
-                string result = client.DownloadString(page);
 
-                // ... Display the result.
-                if (result != null &&
-                    result.Length >= 50)
+            // ... Use HttpClient.
+            
+                using (WebClient client = new WebClient())
                 {
-                    _httpPage = result;
+                    // ... Read the string.
+                    string result = client.DownloadString(page);
+
+                    // ... Display the result.
+                    if (result != null &&
+                        result.Length >= 50)
+                    {
+                        _httpPage = result;
+                    }
+                    else
+                    {
+                        _httpPage = "";
+                    }
                 }
-                else
-                {
-                    _httpPage = "";
-                }
-            }
+            
+            
             
                 
         }
         public double ReadPrice()
         {
-            string http = _httpPage.Substring(_httpPage.IndexOf("price-box-price")+17,10);
+            string http = _httpPage.Substring(_httpPage.IndexOf("price-box-price")+17,40);
             string[] split = http.Split('<');
             return double.Parse(split[0]);
         }

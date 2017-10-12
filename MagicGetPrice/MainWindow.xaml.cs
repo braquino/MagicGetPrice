@@ -45,7 +45,7 @@ namespace MagicGetPrice
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            GetSet.AddSet(TextCode.Text, Sets);
+            //GetSet.AddSet(TextCode.Text, Sets);
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
@@ -76,9 +76,18 @@ namespace MagicGetPrice
             connect.GetCardsData(Cards);
             for (int i = 0; i < Cards.Count; i++)
             {
-                GetPrice getPrice = new GetPrice();
-                getPrice.GatherPrice(Cards[i].Name, Sets.Single(x => x.Code == Cards[i].Set).Name);
-                Cards[i].Price = getPrice.ReadPrice();
+                try
+                {
+                    GetPrice getPrice = new GetPrice();
+                    getPrice.GatherPrice(Cards[i].Name, Sets.Single(x => x.Code == Cards[i].Set).Name);
+                    Cards[i].Price = getPrice.ReadPrice();
+                }
+                catch (Exception)
+                {
+
+                    System.Windows.MessageBox.Show($"Could not retrieve {Cards[i].Name}'s price");
+                }
+                
             }
             connect.SaveCard(Cards);
         }

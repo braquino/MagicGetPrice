@@ -29,7 +29,9 @@ namespace MagicGetPrice
                 {
                     var coll = read[i].Split(',');
                     coll[0] = coll[0].Replace("\"", "");
-                    list.Add(new MTGCard(coll[0], coll[4], int.Parse(coll[1])));
+                    coll[0] = coll[0].Replace("'", "");
+                    if (read[i] != "")
+                        list.Add(new MTGCard(coll[0], coll[4], int.Parse(coll[1])));
                 }
             }
         }

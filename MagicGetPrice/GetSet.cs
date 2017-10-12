@@ -41,7 +41,7 @@ namespace MagicGetPrice
         }
         public string ReadSet()
         {
-            string http = _httpPage.Substring(_httpPage.IndexOf("/price/") +7,20);
+            string http = _httpPage.Substring(_httpPage.IndexOf("/price/") +7,50);
             string[] split = http.Split('/');
             return split[0];
         }
