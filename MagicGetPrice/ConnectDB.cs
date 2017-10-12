@@ -24,7 +24,7 @@ namespace MagicGetPrice
         {
             var table = Consult("select * from cards");
             foreach (DataRow row in table.Rows)
-                list.Add(new MTGCard(row[0].ToString(), row[1].ToString(), int.Parse(row[2].ToString())));
+                list.Add(new MTGCard(row[0].ToString(), row[1].ToString(), int.Parse(row[2].ToString()),double.Parse(row[3].ToString())));
         }
         public void SaveSet(List<MTGSet> list)
         {
@@ -59,8 +59,8 @@ namespace MagicGetPrice
                                                 VALUES
                                                     ('{card.Name}'
                                                     ,'{card.Set}'
-                                                    ,{card.qty}
-                                                    ,{card.Price}); ", connection);
+                                                    ,{card.Qty}
+                                                    ,{card.Price.ToString(System.Globalization.CultureInfo.InvariantCulture)}); ", connection);
 
                 connection.Open();
                 command.ExecuteNonQuery();

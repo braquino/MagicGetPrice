@@ -9,7 +9,15 @@
     <Grid Margin="0,0,-6.333,0">
         <Button Content="Browse csv" HorizontalAlignment="Left" Margin="61,45,0,0" VerticalAlignment="Top" Width="136" Click="Button_Click_3"/>
         <Button Content="Get Collection Prices" HorizontalAlignment="Left" Margin="243,45,0,0" VerticalAlignment="Top" Width="136" Click="Button_Click_4"/>
-        <DataGrid HorizontalAlignment="Left" Height="405" Margin="36,125,0,0" VerticalAlignment="Top" Width="369"/>
+        <DataGrid x:Name="GridCards" HorizontalAlignment="Left" Height="405" Margin="36,125,0,0" VerticalAlignment="Top" Width="369" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Name}" Header="Card Name" Width="*"/>
+                <DataGridTextColumn Binding="{Binding Set}"  Header="Set Code" Width="60"/>
+                <DataGridTextColumn Binding="{Binding Qty}"  Header="Qty." Width="30"/>
+                <DataGridTextColumn Binding="{Binding Price}"  Header="Price" Width="40"/>
+                <DataGridTextColumn Binding="{Binding Value}"  Header="Total Value" Width="70"/>
+            </DataGrid.Columns>
+        </DataGrid>
 
     </Grid>
 </Window>

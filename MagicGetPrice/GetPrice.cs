@@ -50,7 +50,7 @@ namespace MagicGetPrice
         {
             string http = _httpPage.Substring(_httpPage.IndexOf("price-box-price")+17,40);
             string[] split = http.Split('<');
-            return double.Parse(split[0]);
+            return double.Parse(split[0], System.Globalization.CultureInfo.InvariantCulture);
         }
         public static void AddCard(string cardName, string setCode, List<MTGCard> list)
         {

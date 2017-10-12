@@ -27,12 +27,17 @@ namespace MagicGetPrice
 
         public MainWindow()
         {
-            
+
+            connect.GetCardsData(Cards);
             InitializeComponent();
             
             connect.GetSetData(Sets);
 
+            GridCards.ItemsSource = Cards;
+
+
             
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -55,6 +60,7 @@ namespace MagicGetPrice
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
+            Cards.Clear();
             OpenFileDialog fbd = new OpenFileDialog();
             fbd.RestoreDirectory = true;
             fbd.Title = "Select a csv exported from Magic Online";
@@ -72,6 +78,7 @@ namespace MagicGetPrice
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
             Sets.Clear();
+            Cards.Clear();
             connect.GetSetData(Sets);
             connect.GetCardsData(Cards);
             for (int i = 0; i < Cards.Count; i++)
@@ -81,6 +88,7 @@ namespace MagicGetPrice
                     GetPrice getPrice = new GetPrice();
                     getPrice.GatherPrice(Cards[i].Name, Sets.Single(x => x.Code == Cards[i].Set).Name);
                     Cards[i].Price = getPrice.ReadPrice();
+                    Cards[i].Calculate();
                 }
                 catch (Exception)
                 {
