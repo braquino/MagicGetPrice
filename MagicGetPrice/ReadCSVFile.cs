@@ -27,10 +27,13 @@ namespace MagicGetPrice
                 }
                 for (int i = 1; i < read.Count; i++)
                 {
+                    var replace1 = read[i].Split('\"');
+                    string replace2 = replace1[1].Replace(",", "");
+                    read[i] = read[i].Replace(replace1[1], replace2);
                     var coll = read[i].Split(',');
                     coll[0] = coll[0].Replace("\"", "");
                     coll[0] = coll[0].Replace("'", "");
-                    if (read[i] != "")
+                    if (read[i] != "" && coll[4] != "")
                         list.Add(new MTGCard(coll[0], coll[4], int.Parse(coll[1])));
                 }
             }

@@ -49,6 +49,7 @@ namespace MagicGetPrice
         {
             if (list.Where(x => x.Code == setCode).Count() == 0)
             {
+
                 GetSet getSet = new GetSet();
                 getSet.GatherPrice(setCode);
                 list.Add(new MTGSet(setCode, getSet.ReadSet()));

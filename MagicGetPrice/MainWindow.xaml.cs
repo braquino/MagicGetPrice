@@ -93,11 +93,16 @@ namespace MagicGetPrice
                 catch (Exception)
                 {
 
-                    System.Windows.MessageBox.Show($"Could not retrieve {Cards[i].Name}'s price");
+                    TextLog.Text += $"Error - {DateTime.Now}: Could not retrieve information. Card: {Cards[i].Name}, Set: {Cards[i].Set}\n";
                 }
                 
             }
             connect.SaveCard(Cards);
+        }
+
+        private void LoadedData(object sender, RoutedEventArgs e)
+        {
+            TextTotalValue.Text = Cards.Sum(x => x.Value).ToString("N2");
         }
     }
 }
